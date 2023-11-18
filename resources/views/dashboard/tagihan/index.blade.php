@@ -13,7 +13,16 @@
         <section class="section">
             <div class="card">
                 <div class="card-body">
-                    <a class="btn btn-primary mb-3" href="/dashboard/tagihan/create">Tambah data tagihan</a>
+                    <div class="row">
+                        <div class="col">
+                            <a class="btn btn-primary mb-3" href="/dashboard/tagihan/create">Tambah data tagihan</a>
+                        </div>
+                        <div class="col text-end">
+                            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                Import tagihan
+                            </button>
+                        </div>
+                    </div>
                     <table class="table table-striped" id="table1">
                         <thead>
                             <tr>
@@ -55,4 +64,32 @@
             </div>
         </section>
     </div>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Pilih file excel yang mau diimport</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="/dashboard/tagihan/import" method="post" enctype="multipart/form-data">
+                @csrf
+                <div class="modal-body">
+                    <div class="col-lg-12">
+                        <div class="form-group mb-3">
+                            <label class="form-label text-dark" for="dari">File: </label>
+                            <input class="form-control" required name="file" id="dari" type="file"
+                                placeholder="File excel">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary">Import</button>
+                </div>
+            </form>
+          </div>
+        </div>
+    </div>
+
+
 @endsection

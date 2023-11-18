@@ -38,7 +38,7 @@ class AuthController extends Controller
             ];
             $redirectPath = '/dashboard';
         } else {
-            return back()->with('error', 'NISN atau Username atau password salah');
+            return back()->with('error', 'NISN atau Username atau Password salah');
         }
 
         if (Auth::guard($guard)->attempt($credentials)) {
@@ -46,7 +46,7 @@ class AuthController extends Controller
             return redirect($redirectPath)->with('success', 'Berhasil login');
         }
 
-        return back()->with('error', 'NISN atau Username atau password salah');
+        return back()->with('error', 'NISN atau Username atau Password salah');
     }
 
     public function logout() {

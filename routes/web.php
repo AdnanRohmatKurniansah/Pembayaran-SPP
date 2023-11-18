@@ -55,6 +55,7 @@ Route::prefix('dashboard')->group(function() {
             Route::resource('/siswa', SiswaController::class);
             Route::post('/pembayaran/laporan', [PembayaranController::class, 'generateLaporan']);
         });
+        Route::post('/tagihan/import', [TagihanController::class, 'importTagihan']);
         Route::resource('/tagihan', TagihanController::class);
         Route::resource('/pembayaran', PembayaranController::class);
     });

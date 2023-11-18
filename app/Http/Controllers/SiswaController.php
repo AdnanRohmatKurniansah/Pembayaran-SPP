@@ -8,6 +8,7 @@ use App\Models\Kelas;
 use App\Models\Siswa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\ValidationException;
 use Maatwebsite\Excel\Facades\Excel;
 
 class SiswaController extends Controller
@@ -106,8 +107,17 @@ class SiswaController extends Controller
     }
 
     public function importSiswa(Request $request){
-        Excel::import(new ImportSiswa, $request->file('file')->store('files'));
-        return redirect()->back()->with('success', 'Berhasil mengimport');
+        try {
+            Excel::import(new ImportSiswa, $request->file('file')->store('files'));
+            
+            return redirect()->back()->with('success', 'Berhasil mengimport');
+        } catch (ValidationException $validationException) {
+            $errors = $validationException->validator->errors()->all();
+            return redirect()->back()->with('error', $errors);
+        } catch (\Exception $exception) {
+            $errorMessage = $exception->getMessage();
+            return redirect()->back()->with('error', $errorMessage);
+        }
     }
 
     public function exportSiswa(){

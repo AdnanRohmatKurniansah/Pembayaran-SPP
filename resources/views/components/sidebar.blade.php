@@ -65,18 +65,18 @@
                         </a>
                     </li>
                 @else 
-                    <li class="sidebar-item {{ Request::is('dashboard/tagihanmu*') ? 'active' : '' }}">
-                        <a href="/dashboard/tagihanmu" class='sidebar-link'>
-                            <i class="bi bi-card-checklist"></i>
-                            <span>Tagihan anda</span>
-                        </a>
-                    </li>  
                     <li class="sidebar-item {{ Request::is('dashboard/pembayaranmu*') ? 'active' : '' }}">
                         <a href="/dashboard/pembayaranmu" class='sidebar-link'>
                             <i class="bi bi-cash-stack"></i>
                             <span>Pembayaran anda</span>
                         </a>
-                    </li>  
+                    </li> 
+                    <li class="sidebar-item {{ Request::is('dashboard/tagihanmu*') ? 'active' : '' }}">
+                        <a href="/dashboard/tagihanmu" class='sidebar-link'>
+                            <i class="bi bi-card-checklist"></i>
+                            <span>Tagihan anda</span>
+                        </a>
+                    </li>   
                 @endif
 
                 <li class="sidebar-item active"  style="margin-top: 50px">

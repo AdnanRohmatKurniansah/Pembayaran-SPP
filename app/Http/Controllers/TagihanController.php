@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\TagihanImport;
 use App\Models\Siswa;
 use App\Models\Spp;
 use App\Models\Tagihan;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
+use Maatwebsite\Excel\Facades\Excel;
 
 class TagihanController extends Controller
 {
@@ -88,5 +91,18 @@ class TagihanController extends Controller
         $tagihan->delete();
 
         return back()->with('success', 'Data tagihan berhasil dihapus');
+    }
+    public function importTagihan(Request $request){
+        try {
+            Excel::import(new TagihanImport, $request->file('file')->store('files'));
+            
+            return redirect()->back()->with('success', 'Berhasil mengimport');
+        } catch (ValidationException $validationException) {
+            $errors = $validationException->validator->errors()->all();
+            return redirect()->back()->with('error', $errors);
+        } catch (\Exception $exception) {
+            $errorMessage = $exception->getMessage();
+            return redirect()->back()->with('error', $errorMessage);
+        }
     }
 }
