@@ -49,7 +49,7 @@
 </head>
 <body>
     <div class="laporan">
-        <div class="school-name">SMK N 1 Bantul</div>
+        <div class="school-name">SMKN 1 Bantul</div>
         <h2>Laporan Pembayaran </h2>
         <div class="paper">
             <table>
@@ -61,6 +61,8 @@
                         <th>Tanggal Bayar</th>
                         <th>Tahun SPP</th>
                         <th>Jumlah Bayar</th>
+                        <th>Jumlah Kurang</th>
+                        <th>Status</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -74,6 +76,8 @@
                             <td>{{ $pembayaran->created_at->format('d M Y h:i') }}</td>
                             <td>{{ $pembayaran->tagihan->spp->tahun }}</td>
                             <td>Rp. {{ number_format($pembayaran->jumlah_bayar, 0, ',', '.') }}</td>
+                            <td>Rp. {{ number_format($pembayaran->jumlah_kurang, 0, ',', '.') }}</td>
+                            <td>{{ $pembayaran->tagihan->status }}</td>
                         </tr>
                     @endforeach
                 </tbody>

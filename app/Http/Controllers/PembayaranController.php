@@ -113,13 +113,11 @@ class PembayaranController extends Controller
         $dari = $request->dari;
         $sampai = $request->sampai;
     
-        $data = Pembayaran::join('tagihans', 'pembayarans.id_tagihan', '=', 'tagihans.id')
-            ->whereBetween('pembayarans.updated_at', [$dari, $sampai])
-            ->where('tagihans.status', 'lunas')
+        $data = Pembayaran::whereBetween('updated_at', [$dari, $sampai])
             ->get();
     
         if ($data->count() < 1) {
-            return back()->with('error', 'Belum ada pembayaran yg lunas');
+            return back()->with('error', 'Tidak ada pembayaran dlm rentang waktu itu.');
         }
     
         $pdf = Pdf::loadView('dashboard.laporan', [
